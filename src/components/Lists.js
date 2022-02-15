@@ -1,15 +1,19 @@
-import React from "react";
-// import List from "./List";
+import {React,useRef} from "react";
+import './css/Lists.css';
 
-const Lists = ({tasks}) => {
-    const task = tasks.map(task => {
+const Lists = ({tasks, onClickHandler}) => {
+    
+    const item = useRef(null);
+
+    const task = tasks.map((task,i) => {
         return(
-            <div className="ui relaxed divided list" key={Math.random()*121}>
+            <div className="ui relaxed divided list" key={task.id} ref={item} index={i}>
             <div className="item">
               <div className="content">
-              {task}
-                <i className="large cut right aligned icon"></i>
-                <div className="description">Updated 10 mins ago</div>
+                  <div className="task-content">
+                        {task.text} 
+                        {task.text ? <i className="large cut right aligned icon" onClick={(index)=> onClickHandler(index)}></i>: ''}
+                  </div>
               </div>
             </div>
           </div>
